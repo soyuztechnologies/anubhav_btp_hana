@@ -7,7 +7,6 @@
     "private": true,
     "dependencies": {
         "@sap/cds": "^5",
-        "@sap/hana-client": "^2.11.14",
         "express": "^4",
         "hdb": "^0.18.3"
     },
@@ -44,7 +43,7 @@
     },
     "cds": {
         "build": {
-            "target": "."
+            "target": "./gen"
         },
         "requires": {
             "db": {
