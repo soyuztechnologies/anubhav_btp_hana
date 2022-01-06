@@ -1,6 +1,14 @@
 # Getting Started
 
-Welcome to your new project.
+Welcome to AnubhavTrainings.com
+
+#Pre-requisite
+
+1. Create a HANA Cloud Instance in BTP
+2. Bind the service instance of HANA Cloud to the Project in BAS
+3. run `npm install`
+4. run `cds build --production`
+5. run `cds deploy --to hana`
 
 It contains these folders and files, following our recommended project layout:
 
