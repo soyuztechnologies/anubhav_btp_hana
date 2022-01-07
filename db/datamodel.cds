@@ -35,12 +35,10 @@ context master {
         businesspartner: Association to one businesspartner on businesspartner.ADDRESS_GUID = $self;
     }
 
-    // entity prodtext {
-    //     key NODE_KEY: Guid;
-    //     PARENT_KEY: Guid;
-    //     LANGUAGE:String(2);	
-    //     TEXT: String(256);        
-    // }
+    entity test {
+        key NODE_KEY: Guid;
+        TEST: String(10)    ;
+    }
     
     entity product {
         key NODE_KEY: Guid;

@@ -1,6 +1,740 @@
 {
-  "namespace": "anubhav.common",
+  "namespace": "anubhav.db",
   "definitions": {
+    "anubhav.db.CDSViews": {
+      "kind": "context"
+    },
+    "anubhav.db.CDSViews.POWorklist": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.transaction.purchaseorder"
+            ]
+          },
+          "columns": [
+            {
+              "key": true,
+              "ref": [
+                "PO_ID"
+              ],
+              "as": "PurchaseOrderId"
+            },
+            {
+              "ref": [
+                "PARTNER_GUID",
+                "BP_ID"
+              ],
+              "as": "PartnerId"
+            },
+            {
+              "ref": [
+                "PARTNER_GUID",
+                "COMPANY_NAME"
+              ],
+              "as": "CompanyName"
+            },
+            {
+              "ref": [
+                "GROSS_AMOUNT"
+              ],
+              "as": "POGrossAmount"
+            },
+            {
+              "ref": [
+                "Currency",
+                "code"
+              ],
+              "as": "POCurrencyCode"
+            },
+            {
+              "ref": [
+                "LIFECYCLE_STATUS"
+              ],
+              "as": "POStatus"
+            },
+            {
+              "key": true,
+              "ref": [
+                "Items",
+                "PO_ITEM_POS"
+              ],
+              "as": "ItemPosition"
+            },
+            {
+              "ref": [
+                "Items",
+                "PRODUCT_GUID",
+                "PRODUCT_ID"
+              ],
+              "as": "ProductId"
+            },
+            {
+              "ref": [
+                "Items",
+                "PRODUCT_GUID",
+                "DESCRIPTION"
+              ],
+              "as": "ProductName"
+            },
+            {
+              "ref": [
+                "PARTNER_GUID",
+                "ADDRESS_GUID",
+                "CITY"
+              ],
+              "as": "City"
+            },
+            {
+              "ref": [
+                "PARTNER_GUID",
+                "ADDRESS_GUID",
+                "COUNTRY"
+              ],
+              "as": "Country"
+            },
+            {
+              "ref": [
+                "Items",
+                "GROSS_AMOUNT"
+              ],
+              "as": "GrossAmount"
+            },
+            {
+              "ref": [
+                "Items",
+                "NET_AMOUNT"
+              ],
+              "as": "NetAmount"
+            },
+            {
+              "ref": [
+                "Items",
+                "TAX_AMOUNT"
+              ],
+              "as": "TaxAmount"
+            },
+            {
+              "ref": [
+                "Items",
+                "Currency",
+                "code"
+              ],
+              "as": "CurrencyCode"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "PurchaseOrderId": {
+          "key": true,
+          "type": "cds.String",
+          "length": 24
+        },
+        "PartnerId": {
+          "type": "cds.String",
+          "length": 32
+        },
+        "CompanyName": {
+          "type": "cds.String",
+          "length": 250
+        },
+        "POGrossAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "POCurrencyCode": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "type": "cds.String",
+          "length": 3
+        },
+        "POStatus": {
+          "type": "cds.String",
+          "length": 1
+        },
+        "ItemPosition": {
+          "key": true,
+          "type": "cds.Integer"
+        },
+        "ProductId": {
+          "type": "cds.String",
+          "length": 28
+        },
+        "ProductName": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "City": {
+          "type": "cds.String",
+          "length": 44
+        },
+        "Country": {
+          "type": "cds.String",
+          "length": 44
+        },
+        "GrossAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "NetAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "TaxAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "CurrencyCode": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "type": "cds.String",
+          "length": 3
+        }
+      }
+    },
+    "anubhav.db.CDSViews.ProductValueHelp": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.master.product"
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "PRODUCT_ID"
+              ],
+              "as": "ProductId"
+            },
+            {
+              "ref": [
+                "DESCRIPTION"
+              ],
+              "as": "Description"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ProductId": {
+          "@EndUserText.label": [
+            {
+              "language": "EN",
+              "text": "Product ID"
+            },
+            {
+              "language": "DE",
+              "text": "Prodekt ID"
+            }
+          ],
+          "type": "cds.String",
+          "length": 28
+        },
+        "Description": {
+          "@EndUserText.label": [
+            {
+              "language": "EN",
+              "text": "Product Description"
+            },
+            {
+              "language": "DE",
+              "text": "Prodekt Description"
+            }
+          ],
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        }
+      }
+    },
+    "anubhav.db.CDSViews.ItemView": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.transaction.poitems"
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "PARENT_KEY",
+                "PARTNER_GUID",
+                "NODE_KEY"
+              ],
+              "as": "Partner"
+            },
+            {
+              "ref": [
+                "PRODUCT_GUID",
+                "NODE_KEY"
+              ],
+              "as": "ProductId"
+            },
+            {
+              "ref": [
+                "Currency",
+                "code"
+              ],
+              "as": "CurrencyCode"
+            },
+            {
+              "ref": [
+                "GROSS_AMOUNT"
+              ],
+              "as": "GrossAmount"
+            },
+            {
+              "ref": [
+                "NET_AMOUNT"
+              ],
+              "as": "NetAmount"
+            },
+            {
+              "ref": [
+                "TAX_AMOUNT"
+              ],
+              "as": "TaxAmount"
+            },
+            {
+              "ref": [
+                "PARENT_KEY",
+                "OVERALL_STATUS"
+              ],
+              "as": "POStatus"
+            }
+          ]
+        }
+      },
+      "elements": {
+        "Partner": {
+          "type": "anubhav.db.Guid",
+          "length": 32
+        },
+        "ProductId": {
+          "type": "anubhav.db.Guid",
+          "length": 32
+        },
+        "CurrencyCode": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "type": "cds.String",
+          "length": 3
+        },
+        "GrossAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "NetAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "TaxAmount": {
+          "@Semantics.amount.currencyCode": "CURRENCY_CODE",
+          "@sap.unit": "CURRENCY_CODE",
+          "type": "anubhav.common.AmountT",
+          "precision": 15,
+          "scale": 2
+        },
+        "POStatus": {
+          "type": "cds.String",
+          "length": 1
+        }
+      }
+    },
+    "anubhav.db.CDSViews.ProductViewSub": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.master.product"
+            ],
+            "as": "prod"
+          },
+          "columns": [
+            {
+              "ref": [
+                "PRODUCT_ID"
+              ],
+              "as": "ProductId"
+            },
+            {
+              "ref": [
+                "texts",
+                "DESCRIPTION"
+              ],
+              "as": "Description"
+            },
+            {
+              "SELECT": {
+                "from": {
+                  "ref": [
+                    "anubhav.db.transaction.poitems"
+                  ],
+                  "as": "a"
+                },
+                "columns": [
+                  {
+                    "func": "round",
+                    "args": [
+                      {
+                        "func": "SUM",
+                        "args": [
+                          {
+                            "ref": [
+                              "a",
+                              "GROSS_AMOUNT"
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "val": 2
+                      }
+                    ],
+                    "as": "SUM"
+                  }
+                ],
+                "where": [
+                  {
+                    "ref": [
+                      "a",
+                      "PRODUCT_GUID",
+                      "NODE_KEY"
+                    ]
+                  },
+                  "=",
+                  {
+                    "ref": [
+                      "prod",
+                      "NODE_KEY"
+                    ]
+                  }
+                ]
+              },
+              "as": "PO_SUM",
+              "cast": {
+                "type": "cds.Decimal",
+                "precision": 10,
+                "scale": 2
+              }
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ProductId": {
+          "type": "cds.String",
+          "length": 28
+        },
+        "Description": {
+          "localized": null,
+          "type": "cds.String",
+          "length": 255
+        },
+        "PO_SUM": {
+          "@Core.Computed": true,
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 2
+        }
+      }
+    },
+    "anubhav.db.CDSViews.ProductView": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.master.product"
+            ]
+          },
+          "mixin": {
+            "PO_ORDERS": {
+              "type": "cds.Association",
+              "cardinality": {
+                "max": "*"
+              },
+              "target": "anubhav.db.CDSViews.ItemView",
+              "on": [
+                {
+                  "ref": [
+                    "PO_ORDERS",
+                    "ProductId"
+                  ]
+                },
+                "=",
+                {
+                  "ref": [
+                    "$projection",
+                    "ProductId"
+                  ]
+                }
+              ]
+            }
+          },
+          "columns": [
+            {
+              "ref": [
+                "NODE_KEY"
+              ],
+              "as": "ProductId"
+            },
+            {
+              "ref": [
+                "DESCRIPTION"
+              ]
+            },
+            {
+              "ref": [
+                "CATEGORY"
+              ],
+              "as": "Category"
+            },
+            {
+              "ref": [
+                "PRICE"
+              ],
+              "as": "Price"
+            },
+            {
+              "ref": [
+                "TYPE_CODE"
+              ],
+              "as": "TypeCode"
+            },
+            {
+              "ref": [
+                "SUPPLIER_GUID",
+                "BP_ID"
+              ],
+              "as": "BPId"
+            },
+            {
+              "ref": [
+                "SUPPLIER_GUID",
+                "COMPANY_NAME"
+              ],
+              "as": "CompanyName"
+            },
+            {
+              "ref": [
+                "SUPPLIER_GUID",
+                "ADDRESS_GUID",
+                "CITY"
+              ],
+              "as": "City"
+            },
+            {
+              "ref": [
+                "SUPPLIER_GUID",
+                "ADDRESS_GUID",
+                "COUNTRY"
+              ],
+              "as": "Country"
+            },
+            {
+              "ref": [
+                "PO_ORDERS"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ProductId": {
+          "key": true,
+          "type": "anubhav.db.Guid",
+          "length": 32
+        },
+        "DESCRIPTION": {
+          "localized": true,
+          "type": "cds.String",
+          "length": 255
+        },
+        "Category": {
+          "type": "cds.String",
+          "length": 32
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 15,
+          "scale": 2
+        },
+        "TypeCode": {
+          "type": "cds.String",
+          "length": 2
+        },
+        "BPId": {
+          "type": "cds.String",
+          "length": 32
+        },
+        "CompanyName": {
+          "type": "cds.String",
+          "length": 250
+        },
+        "City": {
+          "type": "cds.String",
+          "length": 44
+        },
+        "Country": {
+          "type": "cds.String",
+          "length": 44
+        },
+        "PO_ORDERS": {
+          "type": "cds.Association",
+          "cardinality": {
+            "max": "*"
+          },
+          "target": "anubhav.db.CDSViews.ItemView",
+          "on": [
+            {
+              "ref": [
+                "PO_ORDERS",
+                "ProductId"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "$self",
+                "ProductId"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "anubhav.db.CDSViews.CProductValuesView": {
+      "kind": "entity",
+      "query": {
+        "SELECT": {
+          "from": {
+            "ref": [
+              "anubhav.db.CDSViews.ProductView"
+            ]
+          },
+          "columns": [
+            {
+              "ref": [
+                "ProductId"
+              ]
+            },
+            {
+              "ref": [
+                "Country"
+              ]
+            },
+            {
+              "ref": [
+                "PO_ORDERS",
+                "CurrencyCode"
+              ],
+              "as": "CurrencyCode"
+            },
+            {
+              "func": "round",
+              "args": [
+                {
+                  "func": "sum",
+                  "args": [
+                    {
+                      "ref": [
+                        "PO_ORDERS",
+                        "GrossAmount"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "val": 2
+                }
+              ],
+              "as": "POGrossAmount",
+              "cast": {
+                "type": "cds.Decimal",
+                "precision": 10,
+                "scale": 2
+              }
+            }
+          ],
+          "groupBy": [
+            {
+              "ref": [
+                "ProductId"
+              ]
+            },
+            {
+              "ref": [
+                "Country"
+              ]
+            },
+            {
+              "ref": [
+                "PO_ORDERS",
+                "CurrencyCode"
+              ]
+            }
+          ]
+        }
+      },
+      "elements": {
+        "ProductId": {
+          "key": true,
+          "type": "anubhav.db.Guid",
+          "length": 32
+        },
+        "Country": {
+          "type": "cds.String",
+          "length": 44
+        },
+        "CurrencyCode": {
+          "@title": "{i18n>CurrencyCode}",
+          "@Common.Text": {
+            "=": "name"
+          },
+          "type": "cds.String",
+          "length": 3
+        },
+        "POGrossAmount": {
+          "@Core.Computed": true,
+          "type": "cds.Decimal",
+          "precision": 10,
+          "scale": 2
+        }
+      }
+    },
     "anubhav.common.Gender": {
       "kind": "type",
       "type": "cds.String",
@@ -203,6 +937,20 @@
               ]
             }
           ]
+        }
+      }
+    },
+    "anubhav.db.master.test": {
+      "kind": "entity",
+      "elements": {
+        "NODE_KEY": {
+          "key": true,
+          "type": "anubhav.db.Guid",
+          "length": 32
+        },
+        "TEST": {
+          "type": "cds.String",
+          "length": 10
         }
       }
     },
