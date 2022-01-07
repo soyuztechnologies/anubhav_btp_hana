@@ -43,11 +43,11 @@
     },
     "cds": {
         "build": {
-            "target": "."
+            "target": "./gen"
         },
         "requires": {
             "db": {
-                "kind": "sql"
+                "kind": "hana"
             }
         },
         "hana": {

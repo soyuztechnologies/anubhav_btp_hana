@@ -1,8 +1,8 @@
-namespace anubhav.db;
+//namespace anubhav.db;
 using { cuid, managed, temporal, Currency } from '@sap/cds/common';
 using { anubhav.common } from './common';
 
-
+context anubhav.db{
 type Guid : String(32);
 
 context master {
@@ -100,4 +100,43 @@ context transaction {
               
      }
 
+}
+
+
+
+}
+
+@cds.persistence.calcview
+@cds.persistence.exists 
+Entity ![CV_BP] {
+key     ![NODE_KEY]: String(32)  @title: 'NODE_KEY: NODE_KEY' ; 
+key     ![BP_ROLE]: String(2)  @title: 'BP_ROLE: BP_ROLE' ; 
+key     ![COMPANY_NAME]: String(250)  @title: 'COMPANY_NAME: COMPANY_NAME' ; 
+key     ![BP_ID]: String(32)  @title: 'BP_ID: BP_ID' ; 
+key     ![CITY]: String(44)  @title: 'CITY: CITY' ; 
+key     ![COUNTRY]: String(44)  @title: 'COUNTRY: COUNTRY' ; 
+key     ![LATITUDE]: Decimal(34)  @title: 'LATITUDE: LATITUDE' ; 
+key     ![LONGITUDE]: Decimal(34)  @title: 'LONGITUDE: LONGITUDE' ; 
+}
+
+@cds.persistence.calcview
+@cds.persistence.exists 
+Entity ![CV_PURCHASE] {
+key     ![NODE_KEY]: String(32)  @title: 'NODE_KEY: NODE_KEY' ; 
+key     ![BP_ROLE]: String(2)  @title: 'BP_ROLE: BP_ROLE' ; 
+key     ![COMPANY_NAME]: String(250)  @title: 'COMPANY_NAME: COMPANY_NAME' ; 
+key     ![BP_ID]: String(32)  @title: 'BP_ID: BP_ID' ; 
+key     ![CITY]: String(44)  @title: 'CITY: CITY' ; 
+key     ![COUNTRY]: String(44)  @title: 'COUNTRY: COUNTRY' ; 
+key     ![PARTNER_GUID_NODE_KEY]: String(32)  @title: 'PARTNER_GUID_NODE_KEY: PARTNER_GUID_NODE_KEY' ; 
+key     ![PO_ID]: String(24)  @title: 'PO_ID: PO_ID' ; 
+key     ![LIFECYCLE_STATUS]: String(1)  @title: 'LIFECYCLE_STATUS: LIFECYCLE_STATUS' ; 
+key     ![NOTE]: String(256)  @title: 'NOTE: NOTE' ; 
+key     ![CURRENCY_CODE]: String(3)  @title: 'CURRENCY_CODE: CURRENCY_CODE' ; 
+key     ![LATITUDE]: Decimal(34)  @title: 'LATITUDE: LATITUDE' ; 
+key     ![LONGITUDE]: Decimal(34)  @title: 'LONGITUDE: LONGITUDE' ; 
+key     ![PO_ITEM_POS]: Integer64  @title: 'PO_ITEM_POS: PO_ITEM_POS' ; 
+key     ![GROSS_AMOUNT]: Decimal(15, 2)  @title: 'GROSS_AMOUNT: GROSS_AMOUNT' ; 
+key     ![NET_AMOUNT]: Decimal(15, 2)  @title: 'NET_AMOUNT: NET_AMOUNT' ; 
+key     ![TAX_AMOUNT]: Decimal(15, 2)  @title: 'TAX_AMOUNT: TAX_AMOUNT' ; 
 }

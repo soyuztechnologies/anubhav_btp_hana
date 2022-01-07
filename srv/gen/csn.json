@@ -816,6 +816,9 @@
       "type": "cds.String",
       "length": 255
     },
+    "anubhav.db": {
+      "kind": "context"
+    },
     "anubhav.db.Guid": {
       "kind": "type",
       "type": "cds.String",
@@ -1330,6 +1333,126 @@
               ]
             }
           ]
+        }
+      }
+    },
+    "CV_BP": {
+      "kind": "entity",
+      "@cds.persistence.calcview": true,
+      "@cds.persistence.exists": true,
+      "elements": {
+        "NODE_KEY": {
+          "@title": "NODE_KEY: NODE_KEY",
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "BP_ROLE": {
+          "@title": "BP_ROLE: BP_ROLE",
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "COMPANY_NAME": {
+          "@title": "COMPANY_NAME: COMPANY_NAME",
+          "key": true,
+          "type": "cds.String",
+          "length": 250
+        },
+        "BP_ID": {
+          "@title": "BP_ID: BP_ID",
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "CITY": {
+          "@title": "CITY: CITY",
+          "key": true,
+          "type": "cds.String",
+          "length": 44
+        },
+        "COUNTRY": {
+          "@title": "COUNTRY: COUNTRY",
+          "key": true,
+          "type": "cds.String",
+          "length": 44
+        },
+        "LATITUDE": {
+          "@title": "LATITUDE: LATITUDE",
+          "key": true,
+          "type": "cds.Decimal",
+          "precision": 34
+        },
+        "LONGITUDE": {
+          "@title": "LONGITUDE: LONGITUDE",
+          "key": true,
+          "type": "cds.Decimal",
+          "precision": 34
+        }
+      }
+    },
+    "CatalogService": {
+      "@source": "CatalogService.cds",
+      "kind": "service"
+    },
+    "CatalogService.PurchaseCalculations": {
+      "kind": "entity",
+      "@readonly": true,
+      "projection": {
+        "from": {
+          "ref": [
+            "CV_BP"
+          ]
+        }
+      },
+      "elements": {
+        "NODE_KEY": {
+          "@title": "NODE_KEY: NODE_KEY",
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "BP_ROLE": {
+          "@title": "BP_ROLE: BP_ROLE",
+          "key": true,
+          "type": "cds.String",
+          "length": 2
+        },
+        "COMPANY_NAME": {
+          "@title": "COMPANY_NAME: COMPANY_NAME",
+          "key": true,
+          "type": "cds.String",
+          "length": 250
+        },
+        "BP_ID": {
+          "@title": "BP_ID: BP_ID",
+          "key": true,
+          "type": "cds.String",
+          "length": 32
+        },
+        "CITY": {
+          "@title": "CITY: CITY",
+          "key": true,
+          "type": "cds.String",
+          "length": 44
+        },
+        "COUNTRY": {
+          "@title": "COUNTRY: COUNTRY",
+          "key": true,
+          "type": "cds.String",
+          "length": 44
+        },
+        "LATITUDE": {
+          "@title": "LATITUDE: LATITUDE",
+          "key": true,
+          "type": "cds.Decimal",
+          "precision": 34
+        },
+        "LONGITUDE": {
+          "@title": "LONGITUDE: LONGITUDE",
+          "key": true,
+          "type": "cds.Decimal",
+          "precision": 34
         }
       }
     },
