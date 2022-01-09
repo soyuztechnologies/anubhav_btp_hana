@@ -85,12 +85,14 @@ context master {
 context transaction {
     
      entity purchaseorder: common.Amount, cuid {
-            PO_ID: String(24);     	
+            PO_ID: Integer;     	
             PARTNER_GUID: association to master.businesspartner;                      
             LIFECYCLE_STATUS: String(1);	
             OVERALL_STATUS: String(1);
             Items: Composition of many poitems on Items.PARENT_KEY = $self;
             NOTE: String(256);
+            CREATEDBY: UUID;
+            MODIFIEDBY : UUID;
      }
 
      entity poitems: common.Amount, cuid {

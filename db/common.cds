@@ -18,7 +18,7 @@ type AmountT : Decimal(15,2)@(
 
 type Amount {
     Currency: Currency;	
-    GROSS_AMOUNT:AmountT;	
+    GROSS_AMOUNT:AmountT NOT NULL;	
     NET_AMOUNT:AmountT;
     TAX_AMOUNT:AmountT;     
 }

@@ -21,7 +21,9 @@
           "NET_AMOUNT",
           "TAX_AMOUNT",
           "LIFECYCLE_STATUS",
-          "OVERALL_STATUS"
+          "OVERALL_STATUS",
+          "CREATEDBY",
+          "MODIFIEDBY"
         ],
         "include_filter": []
       },
@@ -34,7 +36,9 @@
         "NET_AMOUNT": "NET_AMOUNT",
         "TAX_AMOUNT": "TAX_AMOUNT",
         "LIFECYCLE_STATUS": "LIFECYCLE_STATUS",
-        "OVERALL_STATUS": "OVERALL_STATUS"
+        "OVERALL_STATUS": "OVERALL_STATUS",
+        "CREATEDBY": "CREATEDBY",
+        "MODIFIEDBY": "MODIFIEDBY"
       }
     }
   ]

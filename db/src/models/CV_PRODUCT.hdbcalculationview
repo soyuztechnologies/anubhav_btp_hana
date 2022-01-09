@@ -63,7 +63,9 @@
   
     <attribute id="NODE_KEY" order="6" displayAttribute="false" attributeHierarchyActive="false">
       <descriptions defaultDescription="NODE_KEY"/>
+  
       <keyMapping columnObjectName="Join_1" columnName="NODE_KEY"/>
+  
     </attribute>
   </attributes>
   <calculatedAttributes/>

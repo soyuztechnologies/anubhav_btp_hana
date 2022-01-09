@@ -12,22 +12,18 @@
   </DataSource>
 </dataSources>
 <calculationViews>
-  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="leftOuter">
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="C1_N" joinType="inner">
     <viewAttributes>
       <viewAttribute id="PO_ID"/>
       <viewAttribute id="PARTNER_GUID_NODE_KEY"/>
       <viewAttribute id="LIFECYCLE_STATUS"/>
       <viewAttribute id="NOTE"/>
       <viewAttribute id="PO_ITEM_POS"/>
-      <viewAttribute id="GROSS_AMOUNT" semanticType="amount" measureType="amount">
-        <unitCurrencyAttribute attributeName="CURRENCY_CODE"/>
-      </viewAttribute>
+      <viewAttribute id="GROSS_AMOUNT" semanticType="amount" measureType="amount"/>
       <viewAttribute id="NET_AMOUNT" semanticType="amount" measureType="amount">
         <unitCurrencyAttribute attributeName="GROSS_AMOUNT"/>
       </viewAttribute>
-      <viewAttribute id="TAX_AMOUNT" semanticType="amount" measureType="amount">
-        <unitCurrencyAttribute attributeName="CURRENCY_CODE"/>
-      </viewAttribute>
+      <viewAttribute id="TAX_AMOUNT" semanticType="amount" measureType="amount"/>
       <viewAttribute id="CURRENCY_CODE"/>
       <viewAttribute hidden="true" id="JOIN$ID$PARENT_KEY_ID"/>
     </viewAttributes>

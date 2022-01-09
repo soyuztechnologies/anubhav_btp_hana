@@ -9,7 +9,9 @@ VIEW localized_anubhav_db_transaction_purchaseorder AS SELECT
   L.PARTNER_GUID_NODE_KEY,
   L.LIFECYCLE_STATUS,
   L.OVERALL_STATUS,
-  L.NOTE
+  L.NOTE,
+  L.CREATEDBY,
+  L.MODIFIEDBY
 FROM anubhav_db_transaction_purchaseorder AS L
 WITH ASSOCIATIONS (
   MANY TO ONE JOIN localized_sap_common_Currencies AS Currency ON (Currency.code = Currency_code),

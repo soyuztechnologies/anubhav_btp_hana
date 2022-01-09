@@ -32,7 +32,10 @@
       <viewAttribute id="TAX_AMOUNT" aggregationType="sum"/>
       <viewAttribute id="CURRENCY_CODE"/>
     </viewAttributes>
-    <calculatedViewAttributes/>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="GROSS" datatype="BIGINT" expressionLanguage="SQL">
+        <formula>IFNULL(&quot;GROSS_AMOUNT&quot;, 0)</formula>
+      </calculatedViewAttribute></calculatedViewAttributes>
     <input node="CV_BP">
       <mapping xsi:type="Calculation:AttributeMapping" target="NODE_KEY" source="NODE_KEY"/>
       <mapping xsi:type="Calculation:AttributeMapping" target="BP_ROLE" source="BP_ROLE"/>
@@ -116,7 +119,7 @@
       <descriptions defaultDescription="LONGITUDE"/>
       <measureMapping columnObjectName="Join_1" columnName="LONGITUDE"/>
     </measure>
-    <measure id="PO_ITEM_POS" order="13" aggregationType="count" measureType="simple">
+    <measure id="PO_ITEM_POS" order="13" aggregationType="sum" measureType="simple">
       <descriptions defaultDescription="PO_ITEM_POS"/>
       <measureMapping columnObjectName="Join_1" columnName="PO_ITEM_POS"/>
     </measure>
@@ -132,6 +135,10 @@
       <descriptions defaultDescription="TAX_AMOUNT"/>
       <measureMapping columnObjectName="Join_1" columnName="TAX_AMOUNT"/>
     </measure>
+    <measure id="GROSS" order="18" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="GROSS"/>
+      <measureMapping columnObjectName="Join_1" columnName="GROSS"/>
+    </measure>
   </baseMeasures>
   <calculatedMeasures/>
   <restrictedMeasures/>
@@ -141,12 +148,12 @@
 <layout>
   <shapes>
     <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
-      <upperLeftCorner x="90" y="105"/>
+      <upperLeftCorner x="92" y="112"/>
     
       <rectangleSize width="160"/>
     </shape>
     <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
-      <upperLeftCorner x="85" y="207"/>
+      <upperLeftCorner x="92" y="217"/>
       <rectangleSize height="30" width="160"/>
     </shape>
     <shape modelObjectName="CV_BP" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
@@ -158,7 +165,7 @@
       <rectangleSize width="223"/>
     </shape>
     <shape modelObjectName="Join_1" modelObjectNameSpace="StarJoinViewNodeInput" modelObjectType="repository">
-      <upperLeftCorner x="175" y="20"/>
+      <upperLeftCorner x="475" y="30"/>
       <rectangleSize width="223"/>
     </shape>
   </shapes>
