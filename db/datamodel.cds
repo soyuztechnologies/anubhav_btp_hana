@@ -93,6 +93,8 @@ context transaction {
             NOTE: String(256);
             CREATEDBY: UUID;
             MODIFIEDBY : UUID;
+            CREATEDAT: Date;
+            MODIFIEDAT: Date;
      }
 
      entity poitems: common.Amount, cuid {

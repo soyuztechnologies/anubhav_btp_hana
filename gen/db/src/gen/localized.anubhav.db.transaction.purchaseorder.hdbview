@@ -11,7 +11,9 @@ VIEW localized_anubhav_db_transaction_purchaseorder AS SELECT
   L.OVERALL_STATUS,
   L.NOTE,
   L.CREATEDBY,
-  L.MODIFIEDBY
+  L.MODIFIEDBY,
+  L.CREATEDAT,
+  L.MODIFIEDAT
 FROM anubhav_db_transaction_purchaseorder AS L
 WITH ASSOCIATIONS (
   MANY TO ONE JOIN localized_sap_common_Currencies AS Currency ON (Currency.code = Currency_code),

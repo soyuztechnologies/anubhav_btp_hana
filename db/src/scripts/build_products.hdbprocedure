@@ -1,0 +1,59 @@
+PROCEDURE "build_products" (
+    in im_category varchar(20),
+    out ex_pc_productid nvarchar(10),
+    out ex_products table (PRODUCT_ID nvarchar(50),
+                     CATEGORY nvarchar(80),
+                     PRICE decimal(15,2)
+                      )
+     )
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER
+READS SQL DATA AS
+BEGIN
+
+declare lt_products table like :ex_products;
+declare lv_index int = 0;
+declare lv_del_index int array;
+declare lv_array_index int = 0;
+
+lt_products = select PRODUCT_ID, CATEGORY, PRICE from "ANUBHAV_DB_MASTER_PRODUCT";
+
+lt_products.PRODUCT_ID[1] = 'ProductA';
+lt_products.category[1] = 'Software';
+lt_products.price[1] = '1999.99';
+
+lt_products.PRODUCT_ID[2] = 'ProductB';
+lt_products.category[2] = 'Software';
+lt_products.price[2] = '2999.99';
+
+lt_products.PRODUCT_ID[3] = 'ProductC';
+lt_products.category[3] = 'Software';
+lt_products.price[3] = '3999.99';
+
+ex_products = select * from :lt_products;
+
+--Internal table like operation - INSERT
+:ex_products.INSERT(('ProductE', 'Notebooks', '4032.99'), 1);
+:ex_products.INSERT(('ProductF', 'Mice', '5896.99'), 2);
+:ex_products.INSERT(('ProductG', 'Projectors', '8582.99'), 3);
+
+--Internal table like operation - UPDATE
+FOR lv_index IN 1..record_count(:ex_products) DO
+	:ex_products.(PRICE).UPDATE((:ex_products.PRICE[lv_index] * 1.25), lv_index);
+END FOR;
+
+--Internal table like operation - DELETE (deleted where price is less than 2500)
+FOR lv_index IN 1..record_count(:ex_products) DO
+	IF :ex_products.PRICE[lv_index] <= 2500.00 THEN
+	 lv_array_index = lv_array_index + 1;
+	 lv_del_index[lv_array_index] = lv_index;
+ END IF;
+END FOR;
+
+:ex_products.DELETE(:lv_del_index);
+
+--search object in internal table
+lv_index = :ex_products.SEARCH("CATEGORY", :im_category, 1);  
+ex_pc_productid = :ex_products.PRODUCT_ID[lv_index];
+
+END

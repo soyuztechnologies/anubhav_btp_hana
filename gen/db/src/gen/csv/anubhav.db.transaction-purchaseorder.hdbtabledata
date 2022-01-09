@@ -23,7 +23,9 @@
           "LIFECYCLE_STATUS",
           "OVERALL_STATUS",
           "CREATEDBY",
-          "MODIFIEDBY"
+          "MODIFIEDBY",
+          "CREATEDAT",
+          "MODIFIEDAT"
         ],
         "include_filter": []
       },
@@ -38,7 +40,9 @@
         "LIFECYCLE_STATUS": "LIFECYCLE_STATUS",
         "OVERALL_STATUS": "OVERALL_STATUS",
         "CREATEDBY": "CREATEDBY",
-        "MODIFIEDBY": "MODIFIEDBY"
+        "MODIFIEDBY": "MODIFIEDBY",
+        "CREATEDAT": "CREATEDAT",
+        "MODIFIEDAT": "MODIFIEDAT"
       }
     }
   ]

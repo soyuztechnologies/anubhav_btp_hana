@@ -12,6 +12,8 @@ COLUMN TABLE anubhav_db_transaction_purchaseorder (
   NOTE NVARCHAR(256),
   CREATEDBY NVARCHAR(36),
   MODIFIEDBY NVARCHAR(36),
+  CREATEDAT DATE,
+  MODIFIEDAT DATE,
   PRIMARY KEY(ID)
 ) WITH ASSOCIATIONS (
   MANY TO ONE JOIN sap_common_Currencies AS Currency ON (Currency.code = Currency_code),
